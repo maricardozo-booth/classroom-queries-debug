@@ -35,19 +35,53 @@
   </tr>
 
   <% @departments.each do |department| %>
+
     <tr>
       <td>
-        <%= @department.id %>
+            <% matching_departments = Department.where({ :id => department.id }) %>
+      
+        <% the_department = matching_departments.at(0) %>
+
+            <% if the_department == nil %>
+    Uh oh! We weren't able to find this department.
+    <% else %>
+
+        <%= the_department.id %>
+
+    <% end %>
       </td>
 
       <td>
-        <%= @department.name %>
+
+  <% matching_departments = Department.where({ :id => department.id }) %>
+      
+        <% the_department = matching_departments.at(0) %>
+
+            <% if the_department == nil %>
+    Uh oh! We weren't able to find this department.
+    <% else %>
+
+        <%= the_department.name %>
+
+    <% end %>
+
       </td>
 
       <td>
-        <a href="/departments/<%= @department.id %>">
+
+        <% matching_departments = Department.where({ :id => department.id }) %>
+      
+        <% the_department = matching_departments.at(0) %>
+
+            <% if the_department == nil %>
+    Uh oh! We weren't able to find this department.
+    <% else %>
+
+        <a href="/departments/<%= the_department.id %>">
           Show details
         </a>
+
+           <% end %>
       </td>
     </tr>
   <% end %>

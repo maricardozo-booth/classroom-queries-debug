@@ -58,7 +58,7 @@
     </th>
   </tr>
 
-  <% @students.eac do |student| %>
+  <% @students.each do |student| %>
     <tr>
       <td>
         <%= student.id %>
@@ -77,9 +77,19 @@
       </td>
 
       <td>
-        <a href="/students/<%= student %>">
+        <% matching_students = Student.where({ :id => student.id }) %>
+      
+        <% the_student = matching_students.at(0) %>
+
+            <% if the_student == nil %>
+    Uh oh! We weren't able to find this student.
+    <% else %>
+ 
+        <a href="/students/<%= the_student.id %>">
           Show details
         </a>
+
+           <% end %>
       </td>
     </tr>
   <% end %>
